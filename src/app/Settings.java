@@ -113,7 +113,7 @@ public class Settings {
 }
 
 // apply polymorphism
-class Properties {
+abstract class Properties {
     private String text;
     private Boolean bool;
 
