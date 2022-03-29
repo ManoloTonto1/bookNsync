@@ -32,12 +32,13 @@ public class Settings {
 
     public Boolean login(){
         //System.out.println(isLogged);
-        if(isLogged) return true;
+        if(this.isLogged) return true;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Password: ");
         String password = scanner.nextLine();
         if (password.equals(this.adminPassword)) {
             System.out.println("Login successful");
+            this.isLogged = true;
             return true;
         } else {
             System.out.println("Login failed");
