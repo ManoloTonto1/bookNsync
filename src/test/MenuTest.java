@@ -20,7 +20,7 @@ public class MenuTest {
         assertTrue(condition);
     }
     @Test
-    public void Login_checkpasscorrect_loginNotsuccessfull(){
+    public void Login_checkpassincorrect_loginNotsuccessfull(){
         //arrange
         Settings settings = Settings.getInstanceTest();
         String input = "bomama123";
