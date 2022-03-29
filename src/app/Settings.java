@@ -21,12 +21,26 @@ public class Settings {
         this.isLogged = false;
 
     }
+    private Settings() {
+        this.username = "username";
+        this.password = "password";
+        this.adminPassword = "bomama";
+        this.spreadsheetLocation = "spreadsheetLocation";
+        this.enableNotification = true;
+        this.isLogged = false;
+
+    }
 
 //Constructor
     public static Settings getInstance() {
         
         Properties[] loadedSettings = json.getSettigs();
         return new Settings(loadedSettings);
+    }
+    public static Settings getInstanceTest() {
+        
+        //Properties[] loadedSettings = json.getSettigs();
+        return new Settings();
     }
 //functions
 
@@ -36,6 +50,21 @@ public class Settings {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Password: ");
         String password = scanner.nextLine();
+        if (password.equals(this.adminPassword)) {
+            System.out.println("Login successful");
+            this.isLogged = true;
+            return true;
+        } else {
+            System.out.println("Login failed");
+            return false;
+        }
+    }
+    public Boolean login(String input){
+        //System.out.println(isLogged);
+        if(this.isLogged) return true;
+        
+        System.out.println("Password: ");
+        String password = input;
         if (password.equals(this.adminPassword)) {
             System.out.println("Login successful");
             this.isLogged = true;

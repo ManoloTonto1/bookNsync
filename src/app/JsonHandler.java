@@ -20,9 +20,10 @@ public class JsonHandler {
 
     // @SuppressWarnings("unchecked")
     public Properties[] getSettigs() {
+        String currentWorkingDir = System.getProperty("user.dir");
         Properties[] settings = new Properties[5];
         JSONParser parser = new JSONParser();
-        try (FileReader reader = new FileReader("appsettings.json")) {
+        try (FileReader reader = new FileReader(currentWorkingDir+"/appsettings.json")) {
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
 
             //Get all the data from the Json file
@@ -49,6 +50,7 @@ public class JsonHandler {
 
     @SuppressWarnings("unchecked")
     public void setSettings(Settings settings) {
+        String currentWorkingDir = System.getProperty("user.dir");
         JSONObject obj = new JSONObject();
         obj.put("username", settings.getUsername());
         obj.put("password", settings.getPassword());
@@ -56,7 +58,7 @@ public class JsonHandler {
         obj.put("spreadsheetLocation", settings.getSpreadsheetLocation());
         obj.put("notifications", settings.getNotification());
 
-        try (FileWriter file = new FileWriter("appsettings.json")) {
+        try (FileWriter file = new FileWriter(currentWorkingDir+"/appsettings.json")) {
             file.write(obj.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
