@@ -2,7 +2,6 @@ package app;
 
 import java.util.ArrayList;
 
-//import org.apache.poi.hpsf.Array;
 
 public class Sync {
     private Subscriber[] subscribers;
