@@ -11,7 +11,7 @@ public class Local_Subscriber implements Subscriber {
     // access the settings
     NotificationManager notifications = NotificationManager.getInstance();
     static Cloud_Subscriber cloudhandler = Cloud_Subscriber.getInstance();
-    static Local_Subscriber instance;
+    private static Local_Subscriber instance;
     Local_Subscriber() {
     }
 

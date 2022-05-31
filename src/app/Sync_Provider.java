@@ -21,9 +21,6 @@ public class Sync_Provider {
         subscribers.add(subscriber);
     }
 
-    public void Unsubscribe() {
-
-    }
 
     public void Notify(String file, ArrayList<Subscriber> subscriberss) {
 

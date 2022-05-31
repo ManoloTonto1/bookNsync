@@ -30,11 +30,5 @@ public class NotificationManager {
 
     }
 
-    public void syncSuccessful(){
-        System.out.println("===== Sync Successful =====");
-        
-
-    }
-
 
 }

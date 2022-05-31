@@ -12,8 +12,6 @@ public class Cloud_Subscriber implements Subscriber {
     Settings settings = Settings.getInstance();
     NotificationManager notifications = NotificationManager.getInstance();
     static Local_Subscriber localhandler = Local_Subscriber.getInstance();
-    private String username = settings.getUsername();
-    private String password = settings.getPassword();
     static Cloud_Subscriber instance;
 
     private Cloud_Subscriber() {
