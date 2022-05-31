@@ -2,19 +2,20 @@ package app;
 
 import java.io.IOException;
 
-import org.apache.poi.hssf.record.BookBoolRecord;
 
 public class Main{
     static Menu menu = new Menu();
-    static ExcelHandlerv2 x = new ExcelHandlerv2();
-    static BookingHandler y = BookingHandler.getInstance();
+    static Sync_Provider provider = new Sync_Provider();
+    static Local_Subscriber local = Local_Subscriber.getInstance();
+    static Cloud_Subscriber cloud = Cloud_Subscriber.getInstance();
     //static Sync sync = new Sync();
 
     //start the sync progam
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        y.Listner();
-        x.Listner();
+        provider.Subscribe(local);
+        provider.Subscribe(cloud);
+        provider.Sync();
         menu.MenuScreen();
 
     }
