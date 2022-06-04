@@ -10,12 +10,17 @@ import org.json.simple.parser.JSONParser;
 
 
 public class JsonHandler {
+    private static JsonHandler instance;
 
     private JsonHandler() {
     }
 
     public static JsonHandler getInstance() {
-        return new JsonHandler();
+        if (instance == null) {
+            instance = new JsonHandler();
+        }
+        return instance;
+        
     }
 
     // @SuppressWarnings("unchecked")
@@ -27,12 +32,13 @@ public class JsonHandler {
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
 
             //Get all the data from the Json file
-            String username = (String) jsonObject.get("name");
+            String username = (String) jsonObject.get("username");
             String Password = (String) jsonObject.get("password");
             String adminPassword = (String) jsonObject.get("adminPassword");
             String spreadsheetLocation = (String) jsonObject.get("spreadsheetLocation");
             Boolean enableNotification = (Boolean) jsonObject.get("notifications");
             //Add it to the array
+        
             settings[0] = new Text(username);
             settings[1] = new Text(Password);
             settings[2] = new Text(adminPassword);
@@ -44,7 +50,7 @@ public class JsonHandler {
         }
 
         // Read info from the json
-
+        
         return settings;
     }
 

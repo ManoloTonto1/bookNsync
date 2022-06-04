@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Settings {
     static JsonHandler json = JsonHandler.getInstance();
+    private static Settings instance;
     private String username;
     private String password;
     private String adminPassword;
@@ -12,30 +13,37 @@ public class Settings {
     private Boolean isLogged;
     
 
-    private Settings(Properties[] loadedSettings) {
+    private Settings() {
+        Properties[] loadedSettings = json.getSettigs();
         this.username = loadedSettings[0].getText();
         this.password = loadedSettings[1].getText();
         this.adminPassword = loadedSettings[2].getText();
         this.spreadsheetLocation = loadedSettings[3].getText();
         this.enableNotification = loadedSettings[4].getBool();
         this.isLogged = false;
+    
 
     }
-    private Settings() {
-        this.username = "username";
-        this.password = "password";
-        this.adminPassword = "bomama";
-        this.spreadsheetLocation = "spreadsheetLocation";
-        this.enableNotification = true;
-        this.isLogged = false;
+    // // Used for settings
+    // private Settings() {
+    //     this.username = "username";
+    //     this.password = "password";
+    //     this.adminPassword = "bomama";
+    //     this.spreadsheetLocation = "spreadsheetLocation";
+    //     this.enableNotification = true;
+    //     this.isLogged = false;
 
-    }
+    // }
 
 //Constructor
     public static Settings getInstance() {
         
-        Properties[] loadedSettings = json.getSettigs();
-        return new Settings(loadedSettings);
+        
+        if (instance == null) {
+            instance = new Settings();
+        }
+        return instance;
+        
     }
     public static Settings getInstanceTest() {
         
@@ -137,45 +145,6 @@ public class Settings {
         this.username = username;
         json.setSettings(this);
         System.out.println("Username successfully changed");
-    }
-
-}
-
-// apply polymorphism
-abstract class Properties {
-    private String text;
-    private Boolean bool;
-
-    public String getText() {
-        return text;
-    }
-
-    public Boolean getBool() {
-        return bool;
-    }
-
-    public void setBool(Boolean bool) {
-        this.bool = bool;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-}
-
-class Text extends Properties {
-
-    public Text(String text) {
-        super.setText(text);
-    }
-
-}
-
-class Bool extends Properties {
-
-    public Bool(Boolean bool) {
-        super.setBool(bool);
     }
 
 }

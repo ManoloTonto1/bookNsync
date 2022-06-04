@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Local_Subscriber implements Subscriber {
+public class Local_Subscriber extends Abstract_Subscriber {
     // access the settings
     NotificationManager notifications = NotificationManager.getInstance();
     static Cloud_Subscriber cloudhandler = Cloud_Subscriber.getInstance();
@@ -67,9 +67,4 @@ public class Local_Subscriber implements Subscriber {
         
     }
 
-    @Override
-    public void update(String filename) {
-        saveFile(filename);
-        
-    }
 }

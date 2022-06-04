@@ -8,7 +8,6 @@ public class Main{
     static Sync_Provider provider = new Sync_Provider();
     static Local_Subscriber local = Local_Subscriber.getInstance();
     static Cloud_Subscriber cloud = Cloud_Subscriber.getInstance();
-    //static Sync sync = new Sync();
 
     //start the sync progam
 
