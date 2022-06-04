@@ -9,15 +9,14 @@ public class NotificationManager {
         return new NotificationManager();
     }
 
-    public void newBooking(String bookingDate){
-        System.out.println("===== New Booking =====");
-        System.out.println("Booking Date: " + bookingDate);
+    public void serverUpdate(){
+        System.out.println("===== Successfully Updated Server =====");
         
     }
 
-    public void bookingCancelled(String bookingData){
-        System.out.println("===== Booking Cancelled =====");
-        System.out.println("Booking Date: " + bookingData);
+    public void localUpdate(){
+        System.out.println("===== Successfully Updated Local File =====");
+        
 
     }
     public void connectionError(String arg){
@@ -28,12 +27,6 @@ public class NotificationManager {
 
     public void systemStart(){
         System.out.println("===== System Started =====");
-
-    }
-
-    public void syncSuccessful(){
-        System.out.println("===== Sync Successful =====");
-        
 
     }
 
