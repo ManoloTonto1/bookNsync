@@ -3,11 +3,12 @@ package app;
 import java.util.ArrayList;
 
 public abstract class Abstract_Subscriber implements Subscriber {
-    Settings settings = Settings.getInstance();
-    NotificationManager notificationManager = NotificationManager.getInstance();
 
     @Override
     public void update(String filename) {
+        Settings settings = Settings.getInstance();
+        NotificationManager notificationManager = NotificationManager.getInstance();
+
         if (settings.getUsername().equals("admin") && settings.getPassword().equals("password1")) {
             saveFile(filename);
         } else

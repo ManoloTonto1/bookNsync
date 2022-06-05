@@ -3,6 +3,7 @@ package app;
 import java.util.Scanner;
 
 public class Settings {
+    static NotificationManager notif = NotificationManager.getInstance();
     static JsonHandler json = JsonHandler.getInstance();
     private static Settings instance;
     private String username;
@@ -11,50 +12,30 @@ public class Settings {
     private String spreadsheetLocation;
     private Boolean enableNotification;
     private Boolean isLogged;
-    
 
     private Settings() {
-        Properties[] loadedSettings = json.getSettigs();
-        this.username = loadedSettings[0].getText();
-        this.password = loadedSettings[1].getText();
-        this.adminPassword = loadedSettings[2].getText();
-        this.spreadsheetLocation = loadedSettings[3].getText();
-        this.enableNotification = loadedSettings[4].getBool();
-        this.isLogged = false;
-    
+        loadSettings();
 
     }
-    // // Used for settings
-    // private Settings() {
-    //     this.username = "username";
-    //     this.password = "password";
-    //     this.adminPassword = "bomama";
-    //     this.spreadsheetLocation = "spreadsheetLocation";
-    //     this.enableNotification = true;
-    //     this.isLogged = false;
 
-    // }
-
-//Constructor
     public static Settings getInstance() {
-        
-        
+
         if (instance == null) {
             instance = new Settings();
         }
         return instance;
-        
+
     }
+
     public static Settings getInstanceTest() {
-        
-        //Properties[] loadedSettings = json.getSettigs();
+
         return new Settings();
     }
-//functions
 
-    public Boolean login(){
-        //System.out.println(isLogged);
-        if(this.isLogged) return true;
+    public Boolean login() {
+        // System.out.println(isLogged);
+        if (this.isLogged)
+            return true;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Password: ");
         String password = scanner.nextLine();
@@ -67,10 +48,12 @@ public class Settings {
             return false;
         }
     }
-    public Boolean login(String input){
-        //System.out.println(isLogged);
-        if(this.isLogged) return true;
-        
+
+    public Boolean login(String input) {
+        // System.out.println(isLogged);
+        if (this.isLogged)
+            return true;
+
         System.out.println("Password: ");
         String password = input;
         if (password.equals(this.adminPassword)) {
@@ -82,22 +65,23 @@ public class Settings {
             return false;
         }
     }
-    //check if the user is logged in
-    public Boolean isLoggedin(){
+
+    // check if the user is logged in
+    public Boolean isLoggedin() {
         return this.isLogged;
     }
 
-    public String notificationReverseState(){
-        if (this.enableNotification == true) return "Disable";
-        else return "Enable";
+    public String notificationReverseState() {
+        if (this.enableNotification == true)
+            return "Disable";
+        else
+            return "Enable";
     }
-        
-    
-    //Getters
+
+    // Getters
     public String getAdminPassword() {
         return adminPassword;
     }
-
 
     public String getPassword() {
         return password;
@@ -110,12 +94,12 @@ public class Settings {
     public String getUsername() {
         return username;
     }
+
     public Boolean getNotification() {
         return enableNotification;
     }
 
-
-    //Setters
+    // Setters
     public void setAdminPassword(String adminPassword) {
         this.adminPassword = adminPassword;
         json.setSettings(this);
@@ -138,13 +122,31 @@ public class Settings {
         this.spreadsheetLocation = spreadsheetLocation;
         json.setSettings(this);
         System.out.println("Spreadsheet location successfully changed");
-        
+
     }
 
     public void setUsername(String username) {
         this.username = username;
         json.setSettings(this);
         System.out.println("Username successfully changed");
+    }
+
+    public void loadSettings(){
+        Properties[] loadedSettings = json.getSettigs();
+        this.username = loadedSettings[0].getText();
+        this.password = loadedSettings[1].getText();
+        this.adminPassword = loadedSettings[2].getText();
+        this.spreadsheetLocation = loadedSettings[3].getText();
+        this.enableNotification = loadedSettings[4].getBool();
+        this.isLogged = false;
+        checkConnection();
+    }
+    public void checkConnection(){
+        if (getUsername().equals("admin") && getPassword().equals("password1")){
+            notif.systemStart();
+            return;
+        }
+        notif.connectionError("Login detals incorrect, please try again.");
     }
 
 }

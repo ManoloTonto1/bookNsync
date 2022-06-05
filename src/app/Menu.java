@@ -5,11 +5,11 @@ import java.util.Scanner;
 public class Menu {
 
     static Settings settings = Settings.getInstance();
-    static NotificationManager notif = NotificationManager.getInstance();
+    
 
     public void MenuScreen(){
         // show that the system has started
-        notif.systemStart();
+        
 
     Scanner scanner = new Scanner(System.in);
     int x = 1;
@@ -45,16 +45,19 @@ public class Menu {
 
                             String newUsername = scanner.next();
                             settings.setUsername(newUsername);
+                            settings.loadSettings();
                             break;
                         case 2:
                             System.out.println("Enter new password: ");
                             String newPassword = scanner.next();
                             settings.setPassword(newPassword);
+                            settings.loadSettings();
                             break;
                         case 3:
                             System.out.println("Enter new admin password: ");
                             String newAdminPassword = scanner.next();
                             settings.setAdminPassword(newAdminPassword);
+                            settings.loadSettings();
                             break;
                         case 4:
                             System.out.println("Enter new spreadsheet location: ");
