@@ -32,40 +32,6 @@ public class Settings {
         return new Settings();
     }
 
-    public Boolean login() {
-
-        if (this.isLogged)
-            return true;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Password: ");
-        String password = scanner.nextLine();
-        if (password.equals(this.adminPassword)) {
-            System.out.println("Login successful");
-            this.isLogged = true;
-            return true;
-        } else {
-            System.out.println("Login failed");
-            return false;
-        }
-    }
-
-    // Test method
-    public Boolean login(String input) {
-        if (this.isLogged)
-            return true;
-
-        System.out.println("Password: ");
-        String password = input;
-        if (password.equals(this.adminPassword)) {
-            System.out.println("Login successful");
-            this.isLogged = true;
-            return true;
-        } else {
-            System.out.println("Login failed");
-            return false;
-        }
-    }
-
     // check if the user is logged in
     public Boolean isLoggedin() {
         return this.isLogged;
@@ -148,6 +114,36 @@ public class Settings {
             return;
         }
         notif.connectionError("Login detals incorrect, please try again.");
+    }
+    
+    public Boolean login() {
+
+        if (this.isLogged)
+            return true;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Password: ");
+        String password = scanner.nextLine();
+        if (password.equals(this.adminPassword)) {
+            System.out.println("Login successful");
+            this.isLogged = true;
+            return true;
+        } else {
+            System.out.println("Login failed");
+            return false;
+        }
+    }
+
+    // Test method
+    public Boolean login(String input) {
+        if (this.isLogged)
+            return true;
+        String password = input;
+        if (password.equals(this.adminPassword)) {
+            this.isLogged = true;
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
