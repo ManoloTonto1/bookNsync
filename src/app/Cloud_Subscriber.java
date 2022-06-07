@@ -1,11 +1,8 @@
 package app;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Cloud_Subscriber extends Abstract_Subscriber {
     // access the settings
@@ -14,7 +11,7 @@ public class Cloud_Subscriber extends Abstract_Subscriber {
     static Cloud_Subscriber instance;
 
     private Cloud_Subscriber() {
-        //load Username and Pasword.
+        // load Username and Pasword.
     }
 
     public static Cloud_Subscriber getInstance() {
@@ -22,25 +19,6 @@ public class Cloud_Subscriber extends Abstract_Subscriber {
             instance = new Cloud_Subscriber();
         }
         return instance;
-    }
-
-    public ArrayList<String> loadFile(String filename) {
-        // get data from Local
-        ArrayList<String> data = new ArrayList<>();
-        try {
-            File LocalFile = new File(filename);
-            Scanner myReader = new Scanner(LocalFile);
-            while (myReader.hasNextLine()) {
-                data.add(myReader.nextLine());
-            }
-            myReader.close();
-            return data;
-
-        } catch (FileNotFoundException e) {
-            notifications.connectionError(String.valueOf(e));
-            e.printStackTrace();
-        }
-        return data;
     }
 
     public void saveFile(String filename) {
