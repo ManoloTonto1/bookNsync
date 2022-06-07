@@ -33,7 +33,7 @@ public class Settings {
     }
 
     public Boolean login() {
-        // System.out.println(isLogged);
+
         if (this.isLogged)
             return true;
         Scanner scanner = new Scanner(System.in);
@@ -49,8 +49,8 @@ public class Settings {
         }
     }
 
+    // Test method
     public Boolean login(String input) {
-        // System.out.println(isLogged);
         if (this.isLogged)
             return true;
 
@@ -131,7 +131,7 @@ public class Settings {
         System.out.println("Username successfully changed");
     }
 
-    public void loadSettings(){
+    public void loadSettings() {
         Properties[] loadedSettings = json.getSettigs();
         this.username = loadedSettings[0].getText();
         this.password = loadedSettings[1].getText();
@@ -141,8 +141,9 @@ public class Settings {
         this.isLogged = false;
         checkConnection();
     }
-    public void checkConnection(){
-        if (getUsername().equals("admin") && getPassword().equals("password1")){
+
+    public void checkConnection() {
+        if (getUsername().equals("admin") && getPassword().equals("password1")) {
             notif.systemStart();
             return;
         }

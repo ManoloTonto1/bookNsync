@@ -11,7 +11,7 @@ public class MenuTest {
     @Test
     public void Login_checkpasscorrect_loginsuccessfull(){
         //arrange
-        Settings settings = Settings.getInstanceTest();
+        Settings settings = Settings.getInstance();
         String input = "bomama";
         //act
         Boolean condition = settings.login(input);
@@ -22,7 +22,7 @@ public class MenuTest {
     @Test
     public void Login_checkpasswordincorrect_loginNotsuccessfull(){
         //arrange
-        Settings settings = Settings.getInstanceTest();
+        Settings settings = Settings.getInstance();
         String input = "bomama123";
         //act
         Boolean condition = settings.login(input);
@@ -33,7 +33,7 @@ public class MenuTest {
     @Test
     public void Login_checkpasscorrect_loginsuccesAndRemembersUser(){
         //arrange
-        Settings settings = Settings.getInstanceTest();
+        Settings settings = Settings.getInstance();
         String input = "bomama";
         //act
         Boolean condition = settings.login(input);
