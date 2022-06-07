@@ -31,55 +31,59 @@ public class Sync_Provider {
 
     public void Sync() {
 
-        Thread t1 = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                Sync_Provider sync = new Sync_Provider();
-                try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
-                    listen(sync, watchService);
-
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            private void listen(Sync_Provider sync, WatchService watchService) throws InterruptedException {
-                ListenService(watchService);
-                UpdateDoc(sync, watchService);
-            }
-
-            private void UpdateDoc(Sync_Provider sync, WatchService watchService) throws InterruptedException {
-                WatchKey key;
-                while ((key = watchService.take()) != null) {
-                    for (WatchEvent<?> event : key.pollEvents()) {
-                        String file = String.valueOf(event.context());
-                        /* update the file */
-                        sync.Notify(file, subscribers);
-                        break;
-                    }
-                    key.reset();
-                    run();
-                    TimeUnit.SECONDS.sleep(1);
-                }
-            }
-
-            private void ListenService(WatchService watchService) {
-                Path path = Paths.get(System.getProperty("user.dir"));
-
-                try {
-                    path.register(
-                            watchService,
-                            StandardWatchEventKinds.ENTRY_CREATE,
-                            StandardWatchEventKinds.ENTRY_DELETE,
-                            StandardWatchEventKinds.ENTRY_MODIFY);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        Thread t1 = new Thread(runable);
         t1.start();
 
     }
+
+    Runnable runable = new Runnable() {
+
+        @Override
+        public void run() {
+            Sync_Provider sync = new Sync_Provider();
+            try (WatchService watchService = FileSystems.getDefault().newWatchService()) {
+                listen(sync, watchService);
+
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        private void UpdateDoc(Sync_Provider sync, WatchService watchService) throws InterruptedException {
+            WatchKey key;
+            while ((key = watchService.take()) != null) {
+                for (WatchEvent<?> event : key.pollEvents()) {
+                    String file = String.valueOf(event.context());
+                    /* update the file */
+                    sync.Notify(file, subscribers);
+                    break;
+                }
+                key.reset();
+                run();
+                TimeUnit.SECONDS.sleep(1);
+            }
+        }
+
+        private void listen(Sync_Provider sync, WatchService watchService) throws InterruptedException {
+            ListenService(watchService);
+            UpdateDoc(sync, watchService);
+        }
+
+        private void ListenService(WatchService watchService) {
+            Path path = Paths.get(System.getProperty("user.dir"));
+
+            try {
+                path.register(
+                        watchService,
+                        StandardWatchEventKinds.ENTRY_CREATE,
+                        StandardWatchEventKinds.ENTRY_DELETE,
+                        StandardWatchEventKinds.ENTRY_MODIFY);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    };
+
 }
