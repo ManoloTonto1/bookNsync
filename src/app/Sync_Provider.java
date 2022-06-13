@@ -36,7 +36,7 @@ public class Sync_Provider {
 
     }
 
-    Runnable runable = new Runnable() {
+    private Runnable runable = new Runnable() {
 
         @Override
         public void run() {
